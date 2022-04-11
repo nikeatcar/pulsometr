@@ -1,6 +1,6 @@
 @import 'base/variables';
 *{
-	font-family: 'Museo Sans Cyrl', sans-serif;
+	font-family: 'MuseoModerno', sans-serif;
 }
 .container{
 	position: relative;
@@ -16,4 +16,6 @@
 @import 'blocks/forms';
 @import 'base/media';
 @import 'blocks/carousel';
-@import 'blocks/catalog'
+@import 'blocks/catalog';
+@import 'blocks/reviews';
+@import 'blocks/footer';
