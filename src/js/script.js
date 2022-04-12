@@ -118,4 +118,49 @@ toggleSlide('.catalog-item__back');
     validateForms('#order form');
 
     $('input[name=phone]').mask("+375 (99) 999 99 99");
+
+    /* ОТПРАВКА ПОЧТЫ */
+    $('form').submit(function(e){
+        e.preventDefault();
+
+        if (!$(this).valid()){
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "mailer/smart.php",
+            data: $(this).serialize()
+        }).done(function(){
+            $(this).find("input").val("");
+            $('#cnsl, #order').fadeOut();
+            $('.overlay, #tnx').fadeIn('slow');
+
+            $('form').trigger('reset');
+        });
+        return false;
+    });
+    
+    /* МЯГКИЙ СКРОЛЛ И PGUP */
+    $(window).scroll(function(){
+        if($(this).scrollTop()>1600){
+            $('.pageup').fadeIn();
+        } else {
+            $('.pageup').fadeOut();
+        }
+    });
+
+    $("a").on('click', function(event) {
+        if (this.hash !== "") {
+          event.preventDefault();
+          var hash = this.hash;
+        $('html, body').animate({
+            scrollTop: $(hash).offset().top
+          }, 800, function(){
+            window.location.hash = hash;
+          });
+        }
+      });
+
+      new WOW().init();
 });

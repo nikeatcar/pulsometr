@@ -35,4 +35,15 @@
             text-decoration: underline;
         }
     }
+    &__icon{
+        &_animated{
+            animation-name: heartbeat;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            &:hover{
+                animation-play-state: paused;
+            }
+        }
+    }
 }
