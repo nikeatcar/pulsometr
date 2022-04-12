@@ -63,4 +63,59 @@ function toggleSlide(item){
 
 toggleSlide('.catalog-item__link');
 toggleSlide('.catalog-item__back');
+
+    /* MODAL */
+    $('[data-modal=cnsl]').on('click', function(){
+        $('.overlay, #cnsl').fadeIn('slow');
+    });
+    $('.mdl__close').on('click', function(){
+        $('.overlay, #cnsl, #thx, #order').fadeOut('slow');
+    });
+
+    $('.button_mini').each(function(i){
+        $(this).on('click', function(){
+            $('#order .mdl__descr').text($('.catalog-item__subtitle').eq(i).text())
+            $('.overlay, #order').fadeIn('slow');
+        });
+    });
+    
+    /* ВАЛИДАЦИЯ ФОРМЫ */
+    function validateForms(form){
+        $(form).validate({
+            rules:{
+                name: {
+                    required: true,
+                    minlength: 2,
+                },
+                phone: {
+                    required: true,
+                    minlength: 13,
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "Пожалуйста, введите своё имя",
+                        minlength: jQuery.validator.format("Минимум 2 символа!")
+                      },
+                    phone: {
+                            required: "Пожалуйста, введите номер телефона",
+                            minlength: jQuery.validator.format("Формат номера: +375 111 11 11")
+                        },
+                    email: {
+                      required: "Нам необходим ваш email для связи",
+                      email: "Email должен быть в формате name@domain.com"
+                    },
+            },
+        });
+    };
+
+    validateForms('#cnsl-form');
+    validateForms('#cnsl form');
+    validateForms('#order form');
+
+    $('input[name=phone]').mask("+375 (99) 999 99 99");
 });
